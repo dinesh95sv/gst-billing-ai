@@ -1,0 +1,165 @@
+.container {
+    flex: 1;
+    background-color: #0c0f14;
+}
+
+.loadingContainer {
+    flex: 1;
+    background-color: #0c0f14;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingText {
+    color: #fff;
+    font-size: 16px;
+}
+
+.header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #0c0f14;
+    z-index: 20;
+}
+
+.backButton {
+    padding: 4px;
+    border-radius: 9999px;
+}
+
+.headerTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+.searchContainer {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 24px;
+}
+
+.searchBar {
+    flex-direction: row;
+    align-items: center;
+    background-color: #151c27;
+    border-width: 1px;
+    border-color: #1f2937;
+    border-radius: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    height: 50px;
+}
+
+.searchInput {
+    flex: 1;
+    color: #fff;
+    margin-left: 12px;
+    font-size: 14px;
+}
+
+.customersList {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 100px;
+}
+
+.customerCard {
+    background-color: #151c27;
+    padding: 16px;
+    border-radius: 16px;
+    border-width: 1px;
+    border-color: #1f2937;
+    margin-bottom: 12px;
+}
+
+.customerInfo {
+    margin-bottom: 8px;
+}
+
+.customerName {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.gstin {
+    font-size: 11px;
+    color: #6b7280;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.contactDetails {
+    flex-direction: row;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.contactItem {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+}
+
+.contactText {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.cardFooter {
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top-width: 1px;
+    border-color: rgba(31, 41, 55, 0.5);
+    gap: 16px;
+}
+
+.actionButton {
+    padding: 4px;
+}
+
+.fab {
+    position: absolute;
+    bottom: 115px;
+    right: 24px;
+    width: 64px;
+    height: 64px;
+    border-radius: 32px;
+    background-color: #3b82f6;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 12px rgba(59, 130, 246, 0.4);
+}
+
+.emptyState {
+    align-items: center;
+    justify-content: center;
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+
+.emptyStateText {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 16px;
+}
+
+.emptyStateSubtext {
+    color: #6b7280;
+    font-size: 14px;
+    margin-top: 8px;
+    text-align: center;
+    width: 70%;
+}

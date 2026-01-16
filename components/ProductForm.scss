@@ -1,0 +1,218 @@
+.container {
+    flex: 1;
+    background-color: #0c0f14;
+}
+
+.loadingContainer {
+    flex: 1;
+    background-color: #0c0f14;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingText {
+    color: #fff;
+    font-size: 16px;
+}
+
+.header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #0c0f14;
+}
+
+.backButton {
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+.backButtonText {
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.headerTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.keyboardAvoidingView {
+    flex: 1;
+}
+
+.scrollContent {
+    flex: 1;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 20px;
+}
+
+.sectionLabel {
+    font-size: 11px;
+    font-weight: 900;
+    color: #4b5563;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+
+.formGroup {
+    gap: 24px;
+}
+
+.inputGroup {
+    margin-bottom: 0;
+}
+
+.label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.input {
+    width: 100%;
+    background-color: #151c27;
+    border-width: 1px;
+    border-color: #1f2937;
+    border-radius: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-vertical: 16px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.currencySymbol {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    color: #6b7280;
+    font-weight: 700;
+    z-index: 10;
+}
+
+.inputWithIcon {
+    padding-left: 32px;
+}
+
+.row {
+    flex-direction: row;
+    gap: 16px;
+}
+
+.column {
+    flex: 1;
+}
+
+.gstRatesContainer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.gstRateButton {
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-vertical: 8px;
+    border-radius: 8px;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    background-color: #151c27;
+    border-width: 1px;
+    border-color: #1f2937;
+}
+
+.gstRateButtonActive {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+.gstRateText {
+    font-size: 12px;
+    font-weight: 700;
+    color: #9ca3af;
+}
+
+.gstRateTextActive {
+    color: #fff;
+}
+
+.inclusiveCard {
+    margin-top: 32px;
+    background-color: #151c27;
+    border-width: 1px;
+    border-color: #1f2937;
+    border-radius: 24px;
+    padding: 24px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.inclusiveTextContainer {
+    flex: 1;
+    margin-right: 16px;
+}
+
+.inclusiveTitle {
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.inclusiveSubtitle {
+    font-size: 10px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.footer {
+    position: absolute;
+    bottom: 110px;
+    left: 24px;
+    right: 24px;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.resetButton {
+    width: 64px;
+    height: 64px;
+    background-color: #151c27;
+    border-width: 1px;
+    border-color: #1f2937;
+    border-radius: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.saveButton {
+    flex: 1;
+    background-color: #3b82f6;
+    border-radius: 16px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 8px 12px rgba(59, 130, 246, 0.4);
+}
+
+.saveButtonText {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}

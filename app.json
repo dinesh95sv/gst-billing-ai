@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "temp_app",
-    "slug": "temp_app",
+    "name": "gst-billing-ai",
+    "slug": "gst-billing-ai",
+    "scheme": "gst-billing-ai",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,7 +14,11 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "The app accesses your camera to let you capture business logos.",
+        "NSPhotoLibraryUsageDescription": "The app accesses your photos to let you upload business logos and signatures."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -21,10 +26,31 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.dinesh95sv.gstbillingai"
     },
     "web": {
+      "output": "static",
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "plugins": [
+      "expo-router",
+      "@react-native-community/datetimepicker",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you upload business logos and signatures.",
+          "cameraPermission": "The app accesses your camera to let you capture business logos."
+        }
+      ]
+    ]
   }
 }

@@ -1,0 +1,59 @@
+.safeArea {
+    flex: 1;
+    background-color: #0c0f14;
+}
+
+.container {
+    flex: 1;
+    max-width: 500px;
+    align-self: center;
+    width: 100%;
+    background-color: #0c0f14;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-color: #1e293b;
+}
+
+.content {
+    flex: 1;
+}
+
+.tabBar {
+    flex-direction: row;
+    background-color: rgba(15, 23, 42, 0.8);
+    border-top-width: 1px;
+    border-top-color: #1e293b;
+    padding-top: 12px;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.navItem {
+    align-items: center;
+    justify-content: center;
+    min-width: 64px;
+}
+
+.iconContainer {
+    margin-bottom: 4px;
+    opacity: 0.6;
+}
+
+.activeIconContainer {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.navLabel {
+    font-size: 10px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: capitalize;
+}
+
+.activeNavLabel {
+    color: #3b82f6;
+}

@@ -1,0 +1,394 @@
+.container {
+    flex: 1;
+    background-color: #0c0f14;
+}
+
+.loadingContainer {
+    flex: 1;
+    background-color: #0c0f14;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingText {
+    color: #fff;
+    font-size: 16px;
+}
+
+.header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #0c0f14;
+    z-index: 20;
+}
+
+.backButton {
+    padding: 4px;
+    border-radius: 9999px;
+}
+
+.headerTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+.saveText {
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.keyboardAvoidingView {
+    flex: 1;
+}
+
+.scrollContent {
+    flex: 1;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 150px;
+}
+
+.statusCard {
+    background-color: #151c27;
+    padding: 16px;
+    border-radius: 16px;
+    border-width: 1px;
+    border-color: rgba(31, 41, 55, 0.5);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    margin-top: 16px;
+}
+
+.statusInfo {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+}
+
+.statusIconContainer {
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.statusIconActive {
+    background-color: rgba(16, 185, 129, 0.1);
+}
+
+.statusIconInactive {
+    background-color: rgba(107, 114, 128, 0.1);
+}
+
+.statusLabel {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.statusValue {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.statusValueActive {
+    color: #10b981;
+}
+
+.statusValueInactive {
+    color: #6b7280;
+}
+
+.logoSection {
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    gap: 16px;
+}
+
+.logoUploadBox {
+    width: 96px;
+    height: 96px;
+    border-radius: 24px;
+    border-width: 2px;
+    border-style: dashed;
+    border-color: #1f2937;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #151c27;
+    overflow: hidden;
+}
+
+.logoImage {
+    width: 100%;
+    height: 100%;
+}
+
+.logoTextContainer {
+    align-items: center;
+}
+
+.logoTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.logoSubtitle {
+    font-size: 10px;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+.sectionHeader {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    margin-top: 32px;
+}
+
+.sectionTitle {
+    font-size: 11px;
+    font-weight: 900;
+    color: #3b82f6;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    /* tracking-[0.15em] approx */
+}
+
+.sectionDescription {
+    font-size: 10px;
+    color: #4b5563;
+    font-weight: 500;
+    margin-top: -8px;
+    margin-bottom: 24px;
+    margin-left: 4px;
+}
+
+.formGroup {
+    gap: 16px;
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #6b7280;
+    margin-bottom: 8px;
+    margin-left: 4px;
+}
+
+.input {
+    width: 100%;
+    background-color: #1b232e;
+    border-width: 1px;
+    border-color: #1f2937;
+    border-radius: 16px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.inputMultiline {
+    height: 96px;
+    padding-top: 16px;
+}
+
+.verifiedBadge {
+    position: absolute;
+    right: 16px;
+    bottom: 110px;
+    background-color: rgba(16, 185, 129, 0.1);
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 6px;
+}
+
+.verifiedText {
+    font-size: 10px;
+    font-weight: 900;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.row {
+    flex-direction: row;
+    gap: 16px;
+}
+
+.column {
+    flex: 1;
+}
+
+.signatureCard {
+    background-color: #151c27;
+    border-radius: 32px;
+    border-width: 1px;
+    border-color: #1f2937;
+    padding: 32px;
+    position: relative;
+    align-items: center;
+}
+
+.signaturePreview {
+    width: 100%;
+    height: 160px;
+    background-color: #fdf2f0;
+    border-radius: 16px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-width: 1px;
+    border-color: rgba(229, 231, 235, 0.5);
+}
+
+.signatureImage {
+    width: 100%;
+    height: 100%;
+}
+
+.noSignatureContainer {
+    align-items: center;
+    opacity: 0.2;
+}
+
+.noSignatureText {
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 8px;
+    color: #fda4af;
+}
+
+.activeSignatureBadge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background-color: #2563eb;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 9999px;
+}
+
+.activeSignatureText {
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #fff;
+}
+
+.signatureActions {
+    flex-direction: row;
+    gap: 12px;
+    width: 100%;
+    margin-top: 32px;
+}
+
+.signatureButton {
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #1b232e;
+    border-width: 1px;
+    border-color: #1f2937;
+    border-radius: 12px;
+}
+
+.signatureButtonText {
+    font-size: 12px;
+    font-weight: 700;
+    color: #d1d5db;
+}
+
+.removeSignatureButton {
+    width: 100%;
+    margin-top: 12px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    background-color: rgba(244, 63, 94, 0.1);
+    border-radius: 16px;
+}
+
+.removeSignatureText {
+    color: #f43f5e;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.complianceText {
+    font-size: 10px;
+    color: #4b5563;
+    font-weight: 500;
+    font-style: italic;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.saveProfileButton {
+    width: 100%;
+    background-color: #3b82f6;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 16px;
+    margin-top: 48px;
+    margin-bottom: 40px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 8px 12px rgba(59, 130, 246, 0.4);
+}
+
+.saveProfileText {
+    font-size: 18px;
+    color: #fff;
+    font-weight: 900;
+}
+
+.footerText {
+    font-size: 10px;
+    font-weight: 900;
+    color: #4b5563;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 40px;
+}

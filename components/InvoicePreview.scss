@@ -1,0 +1,90 @@
+.container {
+    flex: 1;
+    background-color: #0c0f14;
+}
+
+.loadingContainer {
+    flex: 1;
+    background-color: #0c0f14;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingText {
+    color: #fff;
+    font-size: 16px;
+    margin-top: 16px;
+}
+
+.header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #0c0f14;
+    z-index: 20;
+}
+
+.backButton {
+    padding: 4px;
+    border-radius: 9999px;
+}
+
+.headerTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+.webViewContainer {
+    flex: 1;
+    background-color: #f3f4f6;
+    margin: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 180px;
+}
+
+.bottomBar {
+    position: absolute;
+    bottom: 110px;
+    left: 16px;
+    right: 16px;
+    flex-direction: row;
+    gap: 12px;
+    background-color: transparent;
+    z-index: 50;
+}
+
+.actionButton {
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 56px;
+    border-radius: 16px;
+    shadow-color: #000;
+    shadow-offset: 0px 4px;
+    shadow-opacity: 0.3;
+    shadow-radius: 4px;
+    elevation: 4;
+}
+
+.printButton {
+    background-color: #3b82f6;
+}
+
+.shareButton {
+    background-color: #22c55e;
+}
+
+.buttonText {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+}

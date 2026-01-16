@@ -1,0 +1,7 @@
+{
+  "name": "GST Billing Pro",
+  "description": "A high-performance, local-first GST billing application with a dark-themed dashboard, invoice management, and customer tracking.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

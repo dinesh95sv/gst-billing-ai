@@ -1,0 +1,105 @@
+.container {
+    flex: 1;
+    background-color: #0c0f14;
+}
+
+.loadingContainer {
+    flex: 1;
+    background-color: #0c0f14;
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingText {
+    color: #fff;
+    font-size: 16px;
+    margin-top: 16px;
+}
+
+.header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #0c0f14;
+    z-index: 20;
+}
+
+.backButton {
+    padding: 4px;
+    border-radius: 9999px;
+}
+
+.headerTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+.content {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.card {
+    background-color: #151c27;
+    padding: 32px;
+    border-radius: 24px;
+    border-width: 1px;
+    border-color: #1f2937;
+    align-items: center;
+    width: 100%;
+    max-width: 320px;
+}
+
+.cardTitle {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.cardSubtitle {
+    color: #9ca3af;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.actions {
+    width: 100%;
+    gap: 16px;
+}
+
+.actionButton {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    height: 56px;
+    border-radius: 16px;
+}
+
+.printButton {
+    background-color: #3b82f6;
+}
+
+.shareButton {
+    background-color: #1f2937;
+    border-width: 1px;
+    border-color: #374151;
+}
+
+.buttonText {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}

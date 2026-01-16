@@ -1,0 +1,267 @@
+.container {
+    flex: 1;
+    background-color: #0c0f14;
+}
+
+.scrollContent {
+    padding: 24px;
+    padding-bottom: 120px;
+}
+
+.header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.headerTitle {
+    font-size: 24px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+.headerSubtitle {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.iconButton {
+    padding: 10px;
+    background-color: rgba(30, 41, 59, 0.5);
+    border-radius: 14px;
+}
+
+.statsRow {
+    flex-direction: row;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.statCard {
+    flex: 1;
+    background-color: #151c27;
+    border-radius: 24px;
+    padding: 20px;
+    border-width: 1px;
+    border-color: rgba(30, 41, 59, 0.5);
+}
+
+.salesCard {}
+
+.pendingCard {}
+
+.statHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.statLabel {
+    font-size: 10px;
+    font-weight: 800;
+    color: #64748b;
+    letter-spacing: 1px;
+}
+
+.statValue {
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.growthBadge {
+    padding: 4px;
+    background-color: rgba(16, 185, 129, 0.1);
+    border-radius: 8px;
+}
+
+.growthText {
+    font-size: 11px;
+    color: #10b981;
+    font-weight: 700;
+}
+
+.pendingText {
+    font-size: 11px;
+    color: #f59e0b;
+    font-weight: 700;
+}
+
+.createButton {
+    background-color: #3b82f6;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 24px;
+    margin-bottom: 32px;
+    box-shadow: 0 8px 12px rgba(59, 130, 246, 0.3);
+}
+
+.plusIcon {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 2px;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.createButtonText {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.sectionHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 16px;
+}
+
+.sectionTitle {
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+}
+
+.viewAll {
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.activityList {
+    gap: 12px;
+}
+
+.invoiceItem {
+    flex-direction: row;
+    align-items: center;
+    background-color: #151c27;
+    padding: 16px;
+    border-radius: 24px;
+    border-width: 1px;
+    border-color: rgba(30, 41, 59, 0.3);
+}
+
+.statusIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.statusIconPAID {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.statusIconPENDING {
+    background-color: rgba(245, 158, 11, 0.1);
+}
+
+.statusIconOVERDUE {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.invoiceInfo {
+    flex: 1;
+}
+
+.invoiceName {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.invoiceMeta {
+    flex-direction: row;
+    align-items: center;
+}
+
+.invoiceDate {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.dot {
+    color: #1e293b;
+    margin-left: 6px;
+    margin-right: 6px;
+    font-size: 12px;
+}
+
+.statusBadge {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 6px;
+}
+
+.statusBadgePAID {
+    background-color: rgba(16, 185, 129, 0.1);
+}
+
+.statusBadgePENDING {
+    background-color: rgba(245, 158, 11, 0.1);
+}
+
+.statusBadgeOVERDUE {
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+.statusText {
+    font-size: 9px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.statusTextPAID {
+    color: #10b981;
+}
+
+.statusTextPENDING {
+    color: #f59e0b;
+}
+
+.statusTextOVERDUE {
+    color: #ef4444;
+}
+
+.invoiceAmountContainer {
+    align-items: flex-end;
+}
+
+.invoiceAmount {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.emptyState {
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background-color: #151c27;
+    border-radius: 24px;
+    border-style: dashed;
+    border-width: 2px;
+    border-color: #1e293b;
+}
+
+.emptyText {
+    color: #475569;
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 700;
+}
