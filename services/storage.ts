@@ -36,7 +36,8 @@ const MOCK_CUSTOMERS: Customer[] = [
     email: 'contact@globalexports.com',
     phone: '+91 98765 43210',
     address: 'Plot 45, MIDC Industrial Area, Andheri East, Mumbai, Maharashtra 400093',
-    isActive: true
+    isActive: true,
+    shippingAddresses: []
   },
   {
     id: 'c2',
@@ -46,7 +47,8 @@ const MOCK_CUSTOMERS: Customer[] = [
     email: 'billing@zenith.in',
     phone: '+91 88888 77777',
     address: 'Suite 201, Tech Park, Whitefield, Bengaluru, Karnataka 560066',
-    isActive: true
+    isActive: true,
+    shippingAddresses: []
   }
 ];
 

@@ -86,6 +86,12 @@
     align-items: flex-start;
 }
 
+.deleteButton {
+    padding: 8px;
+    margin-right: -8px;
+    margin-top: -8px;
+}
+
 .factoryInfo {
     flex: 1;
 }
@@ -152,20 +158,7 @@
     font-family: monospace;
 }
 
-.cardFooter {
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top-width: 1px;
-    border-color: rgba(31, 41, 55, 0.5);
-    gap: 16px;
-}
 
-.actionButton {
-    padding: 4px;
-}
 
 .fab {
     position: absolute;

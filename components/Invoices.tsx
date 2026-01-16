@@ -14,16 +14,11 @@ const Invoices: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
   const [invoiceToDelete, setInvoiceToDelete] = useState<Invoice | null>(null);
+  const [activeMenuInvoice, setActiveMenuInvoice] = useState<Invoice | null>(null);
 
   const filters = ['All', 'Paid', 'Pending', 'Overdue'];
 
-  useFocusEffect(
-    useCallback(() => {
-      loadInvoices();
-    }, [])
-  );
-
-  const loadInvoices = async () => {
+  const loadInvoices = useCallback(async () => {
     setLoading(true);
     try {
       const data = await StorageService.getInvoices();
@@ -34,7 +29,13 @@ const Invoices: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadInvoices();
+    }, [loadInvoices])
+  );
 
   const deleteInvoice = async (id: string) => {
     try {
@@ -43,6 +44,19 @@ const Invoices: React.FC = () => {
       loadInvoices();
     } catch (e) {
       Alert.alert("Error", "Failed to delete invoice");
+    }
+  };
+
+  const handleUpdateStatus = async (status: InvoiceStatus) => {
+    if (!activeMenuInvoice) return;
+
+    try {
+      const updated = { ...activeMenuInvoice, status };
+      await StorageService.saveInvoice(updated);
+      setActiveMenuInvoice(null);
+      loadInvoices();
+    } catch (e) {
+      Alert.alert("Error", "Failed to update status");
     }
   };
 
@@ -56,13 +70,27 @@ const Invoices: React.FC = () => {
     router.push(`/invoices/${invoice.id}`);
   };
 
+  const getStatusStyles = (status: string) => {
+    const s = (status || '').toUpperCase();
+    switch (s) {
+      case 'PAID':
+        return { badge: styles.statusPaid, text: styles.statusTextPaid };
+      case 'OVERDUE':
+        return { badge: styles.statusOverdue, text: styles.statusTextOverdue };
+      case 'PENDING':
+      default:
+        return { badge: styles.statusPending, text: styles.statusTextPending };
+    }
+  };
+
   const filteredInvoices = useMemo(() => {
     return invoices.filter(inv => {
       const matchesSearch =
         (inv.customerName?.toLowerCase() || '').includes(searchQuery.toLowerCase()) ||
         (inv.invoiceNumber?.toLowerCase() || '').includes(searchQuery.toLowerCase());
 
-      const matchesStatus = activeFilter === 'All' || inv.status === activeFilter;
+      const status = (inv.status || '').toUpperCase();
+      const matchesStatus = activeFilter === 'All' || status === activeFilter.toUpperCase();
 
       return matchesSearch && matchesStatus;
     }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -76,15 +104,6 @@ const Invoices: React.FC = () => {
       </SafeAreaView>
     );
   }
-
-  const getStatusStyles = (status: string) => {
-    switch (status) {
-      case 'Paid': return { badge: styles.statusPaid, text: styles.statusTextPaid };
-      case 'Pending': return { badge: styles.statusPending, text: styles.statusTextPending };
-      case 'Overdue': return { badge: styles.statusOverdue, text: styles.statusTextOverdue };
-      default: return { badge: styles.statusPending, text: styles.statusTextPending };
-    }
-  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -139,13 +158,24 @@ const Invoices: React.FC = () => {
                 activeOpacity={0.7}
               >
                 <View style={styles.cardHeader}>
-                  <View>
+                  <View style={{ flex: 1 }}>
                     <Text style={styles.customerName}>{item.customerName}</Text>
                     <Text style={styles.invoiceNumber}>{item.invoiceNumber}</Text>
                   </View>
-                  <View>
-                    <Text style={styles.amount}>₹{item.grandTotal.toFixed(2)}</Text>
-                    <Text style={styles.date}>{new Date(item.date).toLocaleDateString('en-IN')}</Text>
+                  <View style={{ alignItems: 'flex-end', gap: 4 }}>
+                    <TouchableOpacity
+                      hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+                      onPress={(e) => {
+                        e.stopPropagation();
+                        setActiveMenuInvoice(item);
+                      }}
+                    >
+                      <MoreVertical size={20} color="#9ca3af" />
+                    </TouchableOpacity>
+                    <View>
+                      <Text style={styles.amount}>₹{item.grandTotal.toFixed(2)}</Text>
+                      <Text style={styles.date}>{new Date(item.date).toLocaleDateString('en-IN')}</Text>
+                    </View>
                   </View>
                 </View>
 
@@ -173,7 +203,6 @@ const Invoices: React.FC = () => {
                     >
                       <Trash2 size={18} color="#ef4444" />
                     </TouchableOpacity>
-                    <ChevronRight size={18} color="#4b5563" />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -217,6 +246,54 @@ const Invoices: React.FC = () => {
             </View>
           </View>
         </View>
+      </Modal>
+
+      {/* Status Menu Modal */}
+      <Modal
+        transparent
+        animationType="fade"
+        visible={!!activeMenuInvoice}
+        onRequestClose={() => setActiveMenuInvoice(null)}
+      >
+        <TouchableOpacity
+          style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', justifyContent: 'center', alignItems: 'center', padding: 24 }}
+          activeOpacity={1}
+          onPress={() => setActiveMenuInvoice(null)}
+        >
+          <View style={{ backgroundColor: '#1a222e', width: '100%', maxWidth: 280, borderRadius: 16, overflow: 'hidden', borderWidth: 1, borderColor: '#1f2937' }}>
+            <View style={{ padding: 16, borderBottomWidth: 1, borderColor: '#1f2937' }}>
+              <Text style={{ color: '#9ca3af', fontSize: 12, fontWeight: '600', textTransform: 'uppercase' }}>Update Status</Text>
+              <Text style={{ color: '#fff', fontSize: 14, marginTop: 4 }}>{activeMenuInvoice?.invoiceNumber}</Text>
+            </View>
+
+            {[InvoiceStatus.PAID, InvoiceStatus.PENDING, InvoiceStatus.OVERDUE].map((status) => {
+              const isActive = activeMenuInvoice?.status === status;
+              let activeColor = '#fff';
+              if (isActive) {
+                if (status === InvoiceStatus.PAID) activeColor = '#10b981';
+                if (status === InvoiceStatus.PENDING) activeColor = '#f59e0b';
+                if (status === InvoiceStatus.OVERDUE) activeColor = '#ef4444';
+              }
+
+              return (
+                <TouchableOpacity
+                  key={status}
+                  style={{ paddingVertical: 14, paddingHorizontal: 16, borderBottomWidth: 1, borderColor: 'rgba(31, 41, 55, 0.5)', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+                  onPress={() => handleUpdateStatus(status)}
+                >
+                  <Text style={{ color: isActive ? activeColor : '#d1d5db', fontWeight: isActive ? '700' : '400', fontSize: 15 }}>{status}</Text>
+                  {isActive && <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: activeColor }} />}
+                </TouchableOpacity>
+              );
+            })}
+            <TouchableOpacity
+              style={{ paddingVertical: 14, paddingHorizontal: 16, alignItems: 'center', marginTop: 4 }}
+              onPress={() => setActiveMenuInvoice(null)}
+            >
+              <Text style={{ color: '#9ca3af', fontSize: 13 }}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
       </Modal>
 
     </SafeAreaView>

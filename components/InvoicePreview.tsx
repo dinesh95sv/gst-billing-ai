@@ -216,8 +216,8 @@ const InvoicePreview: React.FC = () => {
             
             <div class="card flex-col">
               <div class="card-label">SHIP TO</div>
-              <div class="font-black text-gray-900 mb-1" style="font-size: 12px;">${invoice.customerName}</div>
-              <div class="text-gray-500 mb-3" style="font-size: 10px; flex: 1;">${customer?.address || 'Warehouse Delivery Address'}</div>
+              <div class="font-black text-gray-900 mb-1" style="font-size: 12px;">${invoice.shippingAddress?.name || invoice.customerName}</div>
+              <div class="text-gray-500 mb-3" style="font-size: 10px; flex: 1;">${invoice.shippingAddress?.address || customer?.address || 'Warehouse Delivery Address'}</div>
               <div class="font-bold text-gray-900" style="font-size: 10px;">Contact: ${customer?.phone || 'N/A'}</div>
             </div>
           </div>

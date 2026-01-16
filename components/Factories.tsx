@@ -84,9 +84,14 @@ const Factories: React.FC = () => {
       <ScrollView contentContainerStyle={styles.factoriesList} showsVerticalScrollIndicator={false}>
         {filteredFactories.length > 0 ? (
           filteredFactories.map((factory) => (
-            <View key={factory.id} style={styles.factoryCard}>
+            <TouchableOpacity
+              key={factory.id}
+              style={styles.factoryCard}
+              onPress={() => router.push(`/factories/${factory.id}/edit`)}
+              activeOpacity={0.7}
+            >
               <View style={styles.factoryHeader}>
-                <View style={styles.factoryInfo}>
+                <View style={[styles.factoryInfo, { flex: 1 }]}>
                   <View style={styles.factoryNameRow}>
                     <Text style={styles.factoryName}>{factory.name}</Text>
                     <View style={[styles.statusIndicator, factory.isActive ? styles.statusActive : styles.statusInactive]} />
@@ -102,17 +107,18 @@ const Factories: React.FC = () => {
                   <Text style={styles.gstinLabel}>GSTIN</Text>
                   <Text style={styles.gstinValue}>{factory.gstin}</Text>
                 </View>
-              </View>
 
-              <View style={styles.cardFooter}>
-                <TouchableOpacity onPress={() => router.push(`/factories/${factory.id}/edit`)} style={styles.actionButton}>
-                  <Edit2 size={18} color="#3b82f6" />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setFactoryToDelete(factory)} style={styles.actionButton}>
+                <TouchableOpacity
+                  onPress={(e) => {
+                    e.stopPropagation();
+                    setFactoryToDelete(factory);
+                  }}
+                  style={styles.deleteButton}
+                >
                   <Trash2 size={18} color="#ef4444" />
                 </TouchableOpacity>
               </View>
-            </View>
+            </TouchableOpacity>
           ))
         ) : (
           <View style={styles.emptyState}>

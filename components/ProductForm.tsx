@@ -6,6 +6,7 @@ import { StorageService } from '../services/storage';
 import { Product } from '../types';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles from './ProductForm.scss';
+import GstDropdown from './GstDropdown';
 
 const ProductForm: React.FC = () => {
   const router = useRouter();
@@ -142,15 +143,11 @@ const ProductForm: React.FC = () => {
             <View style={styles.column}>
               <Text style={styles.label}>GST %</Text>
               <View style={styles.gstRatesContainer}>
-                {[0, 5, 12, 18, 28].map((rate) => (
-                  <TouchableOpacity
-                    key={rate}
-                    onPress={() => setFormData({ ...formData, gstRate: rate })}
-                    style={[styles.gstRateButton, formData.gstRate === rate && styles.gstRateButtonActive]}
-                  >
-                    <Text style={[styles.gstRateText, formData.gstRate === rate && styles.gstRateTextActive]}>{rate}%</Text>
-                  </TouchableOpacity>
-                ))}
+                <GstDropdown
+                  label=""
+                  value={formData.gstRate || 0}
+                  onChange={(rate) => setFormData({ ...formData, gstRate: rate })}
+                />
               </View>
             </View>
           </View>

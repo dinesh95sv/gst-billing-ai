@@ -5,6 +5,13 @@ export enum InvoiceStatus {
   OVERDUE = 'OVERDUE'
 }
 
+export interface ShippingAddress {
+  id: string;
+  name: string;
+  address: string;
+  isSameAsBilling: boolean;
+}
+
 export interface Customer {
   id: string;
   name: string;
@@ -15,6 +22,7 @@ export interface Customer {
   address?: string;
   logoUrl?: string;
   isActive: boolean;
+  shippingAddresses: ShippingAddress[];
 }
 
 export interface Factory {
@@ -68,6 +76,7 @@ export interface Invoice {
   discount?: number;
   grandTotal: number;
   status: InvoiceStatus;
+  shippingAddress?: ShippingAddress;
 }
 
 export interface BillingStats {

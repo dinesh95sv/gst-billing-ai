@@ -49,30 +49,39 @@ const GstReportPreview: React.FC = () => {
     });
 
     let outputGst = 0;
-    let interstate = { cgst: 0, sgst: 0, igst: 0, total: 0 };
-    let local18 = { cgst: 0, sgst: 0, igst: 0, total: 0 };
-    let local12 = { cgst: 0, sgst: 0, igst: 0, total: 0 };
+    const breakdownMap = new Map<number, { cgst: number, sgst: number, igst: number, total: number }>();
 
     filtered.forEach(inv => {
       outputGst += inv.taxTotal || 0;
       const isInterstate = false; // logic to determine interstate vs local
 
       inv.items.forEach(item => {
+        if (!item.gstRate) return;
+
         const itemTax = (item.quantity * item.rate) * (item.gstRate / 100);
+
+        if (!breakdownMap.has(item.gstRate)) {
+          breakdownMap.set(item.gstRate, { cgst: 0, sgst: 0, igst: 0, total: 0 });
+        }
+
+        const entry = breakdownMap.get(item.gstRate)!;
+        entry.total += itemTax;
+
         if (isInterstate) {
-          interstate.igst += itemTax;
-          interstate.total += itemTax;
-        } else if (item.gstRate === 18) {
-          local18.cgst += itemTax / 2;
-          local18.sgst += itemTax / 2;
-          local18.total += itemTax;
-        } else if (item.gstRate === 12) {
-          local12.cgst += itemTax / 2;
-          local12.sgst += itemTax / 2;
-          local12.total += itemTax;
+          entry.igst += itemTax;
+        } else {
+          entry.cgst += itemTax / 2;
+          entry.sgst += itemTax / 2;
         }
       });
     });
+
+    const breakdown = Array.from(breakdownMap.entries())
+      .sort((a, b) => b[0] - a[0]) // Sort by rate descending
+      .map(([rate, data]) => ({
+        description: `Local Sales (${rate}%)`, // Assuming local for now as per original code
+        ...data
+      }));
 
     return {
       period: periodStr,
@@ -91,11 +100,7 @@ const GstReportPreview: React.FC = () => {
         inputItc: 0.00,
         netPayable: outputGst
       },
-      breakdown: [
-        { description: 'Interstate Sales', ...interstate },
-        { description: 'Local Sales (18%)', ...local18 },
-        { description: 'Local Sales (12%)', ...local12 }
-      ]
+      breakdown
     };
   }, [invoices, selectedDate, selectedFactory, periodStr]);
 

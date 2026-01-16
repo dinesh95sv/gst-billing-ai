@@ -70,36 +70,54 @@ const Customers: React.FC = () => {
   );
 
   const renderCustomerItem = ({ item }: { item: Customer }) => (
-    <View style={styles.customerCard}>
-      <View style={styles.customerInfo}>
-        <Text style={styles.customerName}>{item.name}</Text>
-        {item.gstin ? <Text style={styles.gstin}>GSTIN: {item.gstin}</Text> : null}
+    <TouchableOpacity
+      style={styles.customerCard}
+      onPress={() => router.push(`/customers/${item.id}/edit`)}
+      activeOpacity={0.7}
+    >
+      <View style={styles.cardHeader}>
+        <View style={styles.customerInfo}>
+          <Text style={styles.customerName}>{item.name}</Text>
+          {item.gstin ? <Text style={styles.gstin}>GSTIN: {item.gstin}</Text> : null}
+        </View>
+        <TouchableOpacity
+          onPress={(e) => {
+            e.stopPropagation();
+            handleDelete(item.id);
+          }}
+          style={styles.deleteButton}
+        >
+          <Trash2 size={18} color="#ef4444" />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.contactDetails}>
         {item.phone ? (
-          <TouchableOpacity onPress={() => handleCall(item.phone)} style={styles.contactItem}>
+          <TouchableOpacity
+            onPress={(e) => {
+              e.stopPropagation();
+              handleCall(item.phone);
+            }}
+            style={styles.contactItem}
+          >
             <Phone size={14} color="#9ca3af" />
             <Text style={styles.contactText}>{item.phone}</Text>
           </TouchableOpacity>
         ) : null}
         {item.email ? (
-          <TouchableOpacity onPress={() => handleEmail(item.email)} style={styles.contactItem}>
+          <TouchableOpacity
+            onPress={(e) => {
+              e.stopPropagation();
+              handleEmail(item.email);
+            }}
+            style={styles.contactItem}
+          >
             <Mail size={14} color="#9ca3af" />
             <Text style={styles.contactText}>{item.email}</Text>
           </TouchableOpacity>
         ) : null}
       </View>
-
-      <View style={styles.cardFooter}>
-        <TouchableOpacity onPress={() => router.push(`/customers/${item.id}/edit`)} style={styles.actionButton}>
-          <Edit2 size={18} color="#3b82f6" />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => handleDelete(item.id)} style={styles.actionButton}>
-          <Trash2 size={18} color="#ef4444" />
-        </TouchableOpacity>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 
   if (loading) {

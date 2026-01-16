@@ -1,8 +1,8 @@
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { Plus, FileText, Timer, AlertCircle, ArrowUpRight, ArrowDownRight, Clock, BarChart3 } from 'lucide-react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { StorageService } from '../services/storage';
 import { Invoice, InvoiceStatus } from '../types';
 import styles from './Dashboard.scss';
@@ -13,13 +13,15 @@ const Dashboard: React.FC = () => {
   const router = useRouter();
   const [invoices, setInvoices] = useState<Invoice[]>([]);
 
-  useEffect(() => {
-    const loadData = async () => {
-      const data = await StorageService.getInvoices();
-      setInvoices(Array.isArray(data) ? data : []);
-    };
-    loadData();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      const loadData = async () => {
+        const data = await StorageService.getInvoices();
+        setInvoices(Array.isArray(data) ? data : []);
+      };
+      loadData();
+    }, [])
+  );
 
   const stats = useMemo(() => {
     const now = new Date();

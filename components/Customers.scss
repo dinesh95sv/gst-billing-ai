@@ -79,7 +79,14 @@
     margin-bottom: 12px;
 }
 
+.cardHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
 .customerInfo {
+    flex: 1;
     margin-bottom: 8px;
 }
 
@@ -114,19 +121,10 @@
     color: #9ca3af;
 }
 
-.cardFooter {
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top-width: 1px;
-    border-color: rgba(31, 41, 55, 0.5);
-    gap: 16px;
-}
-
-.actionButton {
-    padding: 4px;
+.deleteButton {
+    padding: 8px;
+    margin-right: -8px;
+    margin-top: -8px;
 }
 
 .fab {

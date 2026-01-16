@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Modal, Alert, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BarChart3, ArrowUpRight, Download, Calendar, X, ChevronLeft, ChevronRight, Eye } from 'lucide-react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { StorageService } from '../services/storage';
 import { Invoice } from '../types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -18,9 +18,11 @@ const GstReport: React.FC = () => {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    loadStateAndData();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      loadStateAndData();
+    }, [])
+  );
 
   useEffect(() => {
     saveState();

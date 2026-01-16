@@ -28,7 +28,6 @@
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "permissions": [
-        "android.permission.RECORD_AUDIO",
         "android.permission.RECORD_AUDIO"
       ],
       "package": "com.dinesh95sv.gstbillingai"
@@ -51,6 +50,13 @@
           "cameraPermission": "The app accesses your camera to let you capture business logos."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "15ad1657-9458-4913-a4e0-548aeca9cf76"
+      }
+    },
+    "owner": "dinesh95sv"
   }
 }

@@ -157,6 +157,80 @@
     font-weight: 900;
 }
 
+.addressItem {
+    background-color: #151c27;
+    border-width: 1px;
+    border-color: #1f2937;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.addressHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.addressName {
+    background-color: #1b232e;
+    border-width: 1px;
+    border-color: #1f2937;
+    border-radius: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.removeButton {
+    padding: 4px;
+}
+
+.checkboxContainer {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 8px;
+}
+
+.checkbox {
+    width: 20px;
+    height: 20px;
+    border-width: 2px;
+    border-color: #3b82f6;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkboxChecked {
+    background-color: #3b82f6;
+}
+
+.checkboxLabel {
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.addButton {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 12px;
+}
+
+.addButtonText {
+    color: #3b82f6;
+    font-weight: 700;
+    font-size: 14px;
+}
+
 .footerText {
     font-size: 10px;
     font-weight: 900;

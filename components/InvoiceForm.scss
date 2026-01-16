@@ -15,8 +15,10 @@
 }
 
 .header {
-    padding-horizontal: 24px;
-    padding-vertical: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 16px;
+    padding-bottom: 16px;
     flex-direction: row;
     align-items: center;
     border-bottom-width: 1px;
@@ -43,9 +45,8 @@
 
 .scrollContent {
     flex: 1;
-    padding-horizontal: 24px;
-    padding-top: 24px;
-    padding-bottom: 150px;
+    padding: 24px;
+    padding-bottom: 120px;
 }
 
 .section {
@@ -91,7 +92,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-horizontal: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
     margin-bottom: 16px;
 }
 
@@ -105,8 +107,10 @@
 
 .itemCountBadge {
     background-color: rgba(59, 130, 246, 0.1);
-    padding-horizontal: 8px;
-    padding-vertical: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     border-radius: 4px;
 }
 
@@ -141,8 +145,10 @@
 }
 
 .gstBadge {
-    padding-horizontal: 8px;
-    padding-vertical: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     border-radius: 4px;
     background-color: #0c0f14;
     border-width: 1px;
@@ -185,7 +191,8 @@
     border-width: 2px;
     border-style: dashed;
     border-color: rgba(31, 41, 55, 0.5);
-    padding-vertical: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     border-radius: 24px;
     flex-direction: row;
     align-items: center;
@@ -199,14 +206,16 @@
 }
 
 .footer {
-    position: absolute;
-    bottom: 100px;
-    left: 0;
-    right: 0;
-    background-color: rgba(12, 15, 20, 0.9);
-    padding: 24px;
+    flex: 0.2;
+    background-color: rgba(12, 15, 20, 0.5);
+    padding-top: 16px;
+    padding-bottom: 80px;
+    padding-left: 24px;
+    padding-right: 24px;
     border-top-width: 1px;
     border-color: rgba(31, 41, 55, 0.3);
+    border-radius: 24px;
+    margin-top: 24px;
 }
 
 .summaryRow {
@@ -272,7 +281,8 @@
 .saveButton {
     width: 100%;
     background-color: #2563eb;
-    padding-vertical: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     border-radius: 16px;
     flex-direction: row;
     align-items: center;
