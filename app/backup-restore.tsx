@@ -9,7 +9,7 @@ import * as FileSystem from 'expo-file-system/legacy';
 import * as DocumentPicker from 'expo-document-picker';
 import styles from '../components/BackupRestore.scss';
 
-const BackupRestore: React.FC = () => {
+export default function BackupRestore() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
@@ -131,4 +131,3 @@ const BackupRestore: React.FC = () => {
     );
 };
 
-export default BackupRestore;
