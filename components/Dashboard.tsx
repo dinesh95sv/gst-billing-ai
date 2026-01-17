@@ -28,21 +28,38 @@ const Dashboard: React.FC = () => {
     const currentMonth = now.getMonth();
     const currentYear = now.getFullYear();
 
+    const lastMonth = currentMonth === 0 ? 11 : currentMonth - 1;
+    const lastMonthYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+
     const currentMonthInvoices = invoices.filter(inv => {
       const d = new Date(inv.date);
       return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
     });
 
+    const previousMonthInvoices = invoices.filter(inv => {
+      const d = new Date(inv.date);
+      return d.getMonth() === lastMonth && d.getFullYear() === lastMonthYear;
+    });
+
     const currentSales = currentMonthInvoices.reduce((acc, inv) => acc + inv.grandTotal, 0);
+    const previousSales = previousMonthInvoices.reduce((acc, inv) => acc + inv.grandTotal, 0);
+
     const pendingInvoices = currentMonthInvoices.filter(inv => inv.status === InvoiceStatus.PENDING);
     const pendingAmount = pendingInvoices.reduce((acc, inv) => acc + inv.grandTotal, 0);
     const pendingCount = pendingInvoices.length;
+
+    let growth = 0;
+    if (previousSales > 0) {
+      growth = ((currentSales - previousSales) / previousSales) * 100;
+    } else if (currentSales > 0) {
+      growth = 100;
+    }
 
     return {
       currentSales,
       pendingAmount,
       pendingCount,
-      growth: 12.5 // Mock for visual
+      growth
     };
   }, [invoices]);
 
@@ -62,12 +79,18 @@ const Dashboard: React.FC = () => {
         <View style={[styles.statCard, styles.salesCard]}>
           <View style={styles.statHeader}>
             <Text style={styles.statLabel}>MONTHLY SALES</Text>
-            <View style={styles.growthBadge}>
-              <ArrowUpRight size={12} color="#10b981" />
+            <View style={[styles.growthBadge, stats.growth < 0 && styles.growthBadgeNegative]}>
+              {stats.growth >= 0 ? (
+                <ArrowUpRight size={12} color="#10b981" />
+              ) : (
+                <ArrowDownRight size={12} color="#ef4444" />
+              )}
             </View>
           </View>
           <Text style={styles.statValue}>₹{stats.currentSales.toLocaleString('en-IN')}</Text>
-          <Text style={styles.growthText}>+12.5% vs last month</Text>
+          <Text style={[styles.growthText, stats.growth < 0 && styles.growthTextNegative]}>
+            {stats.growth.toFixed(1)}% vs last month
+          </Text>
         </View>
 
         <View style={[styles.statCard, styles.pendingCard]}>

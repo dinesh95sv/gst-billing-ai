@@ -483,118 +483,121 @@ const InvoiceForm: React.FC = () => {
       </View>
 
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.keyboardAvoidingView}>
-        <View style={{ flex: 0.9 }}>
+        <View style={{ flex: 1 }}>
           <ScrollView
             ref={scrollViewRef}
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
           >
-            <View style={styles.section}>
-              <View style={{ gap: 16, marginBottom: 16 }}>
-                <SearchableFactory
-                  factories={factories}
-                  selectedId={selectedFactoryId}
-                  onSelect={(f) => setSelectedFactoryId(f.id)}
-                />
-                <SearchableCustomer
-                  customers={customers}
-                  selectedId={selectedCustomerId}
-                  onSelect={(c) => {
-                    setSelectedCustomerId(c.id);
-                    const sameAsBilling = c.shippingAddresses?.find(a => a.isSameAsBilling);
-                    setSelectedShippingAddress(sameAsBilling || null);
-                  }}
-                />
-                {selectedCustomer && (
-                  <SearchableShippingAddress
-                    addresses={selectedCustomer.shippingAddresses || []}
-                    selectedId={selectedShippingAddress?.id || ''}
-                    onSelect={(a) => setSelectedShippingAddress(a)}
-                  />
-                )}
-              </View>
-
-              <View style={styles.row}>
-                <View style={[styles.column, { flex: 65 }]}>
-                  <Text style={styles.label}>Invoice No.</Text>
-                  <TextInput style={styles.input} value={invoiceNumber} onChangeText={setInvoiceNumber} />
-                </View>
-                <View style={[styles.column, { flex: 35 }]}>
-                  <Text style={styles.label}>Date</Text>
-                  <TextInput style={styles.input} value={invoiceDate} onChangeText={setInvoiceDate} />
-                </View>
-              </View>
-            </View>
-
-            <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Line Items</Text>
-              <View style={styles.itemCountBadge}>
-                <Text style={styles.itemCountText}>{items.length} Total</Text>
-              </View>
-            </View>
-
-            {items.map((item) => (
-              <View
-                key={item.id}
-                style={styles.itemCard}
-                onLayout={(e) => { if (item.id) itemPositions.current[item.id] = e.nativeEvent.layout.y; }}
-              >
-                {items.length > 1 && (
-                  <TouchableOpacity onPress={() => removeItem(item.id!)} style={styles.deleteItemButton}>
-                    <Trash2 size={18} color="#f43f5e" />
-                  </TouchableOpacity>
-                )}
-                <SearchableProduct
-                  products={products}
-                  value={item.productName || ''}
-                  onSelect={(p) => handleProductSelect(item.id!, p)}
-                  onChange={(val) => updateItem(item.id!, 'productName', val)}
-                />
-                <View style={styles.itemRow}>
-                  <View style={styles.column}>
-                    <Text style={styles.label}>Qty</Text>
-                    <TextInput keyboardType="numeric" style={styles.input} value={item.quantity?.toString()} onChangeText={(t) => updateItem(item.id!, 'quantity', parseFloat(t) || 0)} />
-                  </View>
-                  <View style={styles.column}>
-                    <Text style={styles.label}>Rate</Text>
-                    <TextInput keyboardType="numeric" style={styles.input} value={item.rate?.toString()} onChangeText={(t) => updateItem(item.id!, 'rate', parseFloat(t) || 0)} />
-                  </View>
-                  <View style={styles.column}>
-                    <GstDropdown label="GST %" value={item.gstRate || 0} onChange={(r) => updateItem(item.id!, 'gstRate', r)} />
-                  </View>
-                </View>
-              </View>
-            ))}
-
-            <TouchableOpacity onPress={handleAddItem} style={styles.addItemButton}>
-              <Plus size={20} color="#6b7280" />
-              <Text style={styles.addItemText}>Add Another Item</Text>
-            </TouchableOpacity>
-          </ScrollView>
-        </View>
-
-        <View style={styles.footer}>
-          <View style={styles.summaryRow}>
             <View>
-              <Text style={styles.grandTotalLabel}>Grand Total</Text>
-              <Text style={styles.grandTotalValue}>₹{grandTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</Text>
-            </View>
-            <View style={styles.summaryDetails}>
-              <View style={styles.discountRow}>
-                <Tag size={12} color="#f43f5e" />
-                <Text style={styles.discountLabel}>Discount</Text>
-                <TextInput keyboardType="numeric" style={styles.discountInput} placeholder="0" value={discount} onChangeText={setDiscount} />
+              <View style={styles.section}>
+                <View style={{ gap: 16, marginBottom: 16 }}>
+                  <SearchableFactory
+                    factories={factories}
+                    selectedId={selectedFactoryId}
+                    onSelect={(f) => setSelectedFactoryId(f.id)}
+                  />
+                  <SearchableCustomer
+                    customers={customers}
+                    selectedId={selectedCustomerId}
+                    onSelect={(c) => {
+                      setSelectedCustomerId(c.id);
+                      const sameAsBilling = c.shippingAddresses?.find(a => a.isSameAsBilling);
+                      setSelectedShippingAddress(sameAsBilling || null);
+                    }}
+                  />
+                  {selectedCustomer && (
+                    <SearchableShippingAddress
+                      addresses={selectedCustomer.shippingAddresses || []}
+                      selectedId={selectedShippingAddress?.id || ''}
+                      onSelect={(a) => setSelectedShippingAddress(a)}
+                    />
+                  )}
+                </View>
+
+                <View style={styles.row}>
+                  <View style={[styles.column, { flex: 65 }]}>
+                    <Text style={styles.label}>Invoice No.</Text>
+                    <TextInput style={styles.input} value={invoiceNumber} onChangeText={setInvoiceNumber} />
+                  </View>
+                  <View style={[styles.column, { flex: 35 }]}>
+                    <Text style={styles.label}>Date</Text>
+                    <TextInput style={styles.input} value={invoiceDate} onChangeText={setInvoiceDate} />
+                  </View>
+                </View>
               </View>
+
+              <View style={styles.sectionHeader}>
+                <Text style={styles.sectionTitle}>Line Items</Text>
+                <View style={styles.itemCountBadge}>
+                  <Text style={styles.itemCountText}>{items.length} Total</Text>
+                </View>
+              </View>
+
+              {items.map((item) => (
+                <View
+                  key={item.id}
+                  style={styles.itemCard}
+                  onLayout={(e) => { if (item.id) itemPositions.current[item.id] = e.nativeEvent.layout.y; }}
+                >
+                  {items.length > 1 && (
+                    <TouchableOpacity onPress={() => removeItem(item.id!)} style={styles.deleteItemButton}>
+                      <Trash2 size={18} color="#f43f5e" />
+                    </TouchableOpacity>
+                  )}
+                  <SearchableProduct
+                    products={products}
+                    value={item.productName || ''}
+                    onSelect={(p) => handleProductSelect(item.id!, p)}
+                    onChange={(val) => updateItem(item.id!, 'productName', val)}
+                  />
+                  <View style={styles.itemRow}>
+                    <View style={styles.column}>
+                      <Text style={styles.label}>Qty</Text>
+                      <TextInput keyboardType="numeric" style={styles.input} value={item.quantity?.toString()} onChangeText={(t) => updateItem(item.id!, 'quantity', parseFloat(t) || 0)} />
+                    </View>
+                    <View style={styles.column}>
+                      <Text style={styles.label}>Rate</Text>
+                      <TextInput keyboardType="numeric" style={styles.input} value={item.rate?.toString()} onChangeText={(t) => updateItem(item.id!, 'rate', parseFloat(t) || 0)} />
+                    </View>
+                    <View style={styles.column}>
+                      <GstDropdown label="GST %" value={item.gstRate || 0} onChange={(r) => updateItem(item.id!, 'gstRate', r)} />
+                    </View>
+                  </View>
+                </View>
+              ))}
+
+              <TouchableOpacity onPress={handleAddItem} style={styles.addItemButton}>
+                <Plus size={20} color="#6b7280" />
+                <Text style={styles.addItemText}>Add Another Item</Text>
+              </TouchableOpacity>
+
+            </View>
+          </ScrollView>
+          <View style={styles.footer}>
+            <View style={styles.summaryRow}>
               <View>
-                <Text style={styles.summaryText}>Sub: ₹{subTotal.toLocaleString('en-IN')}</Text>
-                <Text style={styles.summaryText}>Tax: ₹{taxTotal.toLocaleString('en-IN')}</Text>
+                <Text style={styles.grandTotalLabel}>Grand Total</Text>
+                <Text style={styles.grandTotalValue}>₹{grandTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</Text>
+              </View>
+              <View style={styles.summaryDetails}>
+                <View style={styles.discountRow}>
+                  <Tag size={12} color="#f43f5e" />
+                  <Text style={styles.discountLabel}>Discount</Text>
+                  <TextInput keyboardType="numeric" style={styles.discountInput} placeholder="0" value={discount} onChangeText={setDiscount} />
+                </View>
+                <View>
+                  <Text style={styles.summaryText}>Sub: ₹{subTotal.toLocaleString('en-IN')}</Text>
+                  <Text style={styles.summaryText}>Tax: ₹{taxTotal.toLocaleString('en-IN')}</Text>
+                </View>
               </View>
             </View>
+            <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
+              <Save size={20} color="#fff" />
+              <Text style={styles.saveButtonText}>{isEditMode ? 'Update Invoice' : 'Generate Invoice'}</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
-            <Save size={20} color="#fff" />
-            <Text style={styles.saveButtonText}>{isEditMode ? 'Update Invoice' : 'Generate Invoice'}</Text>
-          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>

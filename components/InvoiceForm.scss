@@ -44,7 +44,7 @@
 }
 
 .scrollContent {
-    flex: 1;
+    flex-grow: 1;
     padding: 24px;
     padding-bottom: 120px;
 }
@@ -206,7 +206,6 @@
 }
 
 .footer {
-    flex: 0.2;
     background-color: rgba(12, 15, 20, 0.5);
     padding-top: 16px;
     padding-bottom: 80px;
