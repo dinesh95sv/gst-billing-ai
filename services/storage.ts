@@ -222,5 +222,51 @@ export const StorageService = {
     const factories = await StorageService.getFactories();
     const filtered = factories.filter(f => f.id !== id);
     await AsyncStorage.setItem(STORAGE_KEYS.FACTORIES, JSON.stringify(filtered));
+  },
+
+  exportAllData: async () => {
+    try {
+      const keys = Object.values(STORAGE_KEYS);
+      const allData: any = {};
+      for (const key of keys) {
+        const value = await AsyncStorage.getItem(key);
+        allData[key] = value ? JSON.parse(value) : [];
+      }
+      return allData;
+    } catch (error) {
+      console.error('Error exporting data', error);
+      throw error;
+    }
+  },
+
+  importAllData: async (importedData: any) => {
+    try {
+      const keys = Object.values(STORAGE_KEYS);
+      for (const key of keys) {
+        if (!importedData[key]) continue;
+
+        const existingRaw = await AsyncStorage.getItem(key);
+        const existingData = existingRaw ? JSON.parse(existingRaw) : [];
+        const newData = importedData[key];
+
+        if (!Array.isArray(newData)) continue;
+
+        // Merge logic: only add if ID doesn't exist
+        const mergedData = [...existingData];
+        const existingIds = new Set(existingData.map((item: any) => item.id));
+
+        for (const item of newData) {
+          if (!existingIds.has(item.id)) {
+            mergedData.push(item);
+            existingIds.add(item.id);
+          }
+        }
+
+        await AsyncStorage.setItem(key, JSON.stringify(mergedData));
+      }
+    } catch (error) {
+      console.error('Error importing data', error);
+      throw error;
+    }
   }
 };

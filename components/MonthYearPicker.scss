@@ -1,0 +1,113 @@
+.modalOverlay {
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.pickerContainer {
+    width: 100%;
+    max-width: 320px;
+    background-color: #151c27;
+    border-radius: 24px;
+    border-width: 1px;
+    border-color: #1f2937;
+    overflow: hidden;
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.5);
+}
+
+.header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #0c0f14;
+    border-bottom-width: 1px;
+    border-color: #1f2937;
+}
+
+.yearText {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.yearControls {
+    flex-direction: row;
+    gap: 16px;
+}
+
+.controlButton {
+    padding: 8px;
+    background-color: #1f2937;
+    border-radius: 12px;
+}
+
+.monthsGrid {
+    padding: 16px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.monthItem {
+    width: 29%;
+    aspect-ratio: 1.2;
+    background-color: #1f2937;
+    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.monthItemSelected {
+    background-color: #3b82f6;
+}
+
+.monthText {
+    color: #9ca3af;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.monthTextSelected {
+    color: #fff;
+    font-weight: 800;
+}
+
+.footer {
+    padding: 16px 20px 20px;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.footerButton {
+    flex: 1;
+    height: 48px;
+    border-radius: 14px;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancelButton {
+    background-color: #1f2937;
+}
+
+.confirmButton {
+    background-color: #3b82f6;
+}
+
+.cancelButtonText {
+    color: #9ca3af;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.confirmButtonText {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+}

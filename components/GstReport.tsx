@@ -6,7 +6,7 @@ import { useRouter, useFocusEffect } from 'expo-router';
 import { StorageService } from '../services/storage';
 import { Invoice } from '../types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import MonthYearPicker from './MonthYearPicker';
 import styles from './GstReport.scss';
 
 const STATE_KEY = 'reports_page_state';
@@ -79,11 +79,9 @@ const GstReport: React.FC = () => {
   }, [filteredInvoices]);
 
 
-  const handleDateChange = (event: any, date?: Date) => {
+  const handleDateChange = (date: Date) => {
+    setSelectedDate(date);
     setShowPicker(false);
-    if (date) {
-      setSelectedDate(date);
-    }
   };
 
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -102,25 +100,20 @@ const GstReport: React.FC = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>GST Reports</Text>
+        <TouchableOpacity onPress={() => setShowPicker(true)} style={styles.headerDateButton}>
+          <Calendar size={18} color="#3b82f6" />
+          <Text style={styles.headerDateText}>{currentMonthName} {selectedDate.getFullYear()}</Text>
+        </TouchableOpacity>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        {/* Date Selection */}
-        <View style={styles.dateRangeContainer}>
-          <TouchableOpacity onPress={() => setShowPicker(true)} style={styles.dateButton}>
-            <Calendar size={20} color="#9ca3af" />
-            <Text style={styles.dateText}>{currentMonthName} {selectedDate.getFullYear()}</Text>
-          </TouchableOpacity>
-        </View>
 
-        {showPicker && (
-          <DateTimePicker
-            value={selectedDate}
-            mode="date"
-            display="default"
-            onChange={handleDateChange}
-          />
-        )}
+        <MonthYearPicker
+          visible={showPicker}
+          value={selectedDate}
+          onClose={() => setShowPicker(false)}
+          onChange={handleDateChange}
+        />
 
         {/* Summary Cards */}
         <View style={styles.summaryCards}>

@@ -1,7 +1,7 @@
 
 import React, { useState, useMemo, useCallback } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import { Plus, FileText, Timer, AlertCircle, ArrowUpRight, ArrowDownRight, Clock, BarChart3 } from 'lucide-react-native';
+import { Plus, FileText, Timer, AlertCircle, ArrowUpRight, ArrowDownRight, Clock, Settings } from 'lucide-react-native';
 import { useRouter, useFocusEffect } from 'expo-router';
 import { StorageService } from '../services/storage';
 import { Invoice, InvoiceStatus } from '../types';
@@ -70,8 +70,8 @@ const Dashboard: React.FC = () => {
           <Text style={styles.headerTitle}>Dashboard</Text>
           <Text style={styles.headerSubtitle}>GST Billing Pro</Text>
         </View>
-        <TouchableOpacity onPress={() => router.push('/reports')} style={styles.iconButton}>
-          <BarChart3 color="#94a3b8" size={24} />
+        <TouchableOpacity onPress={() => router.push('/backup-restore')} style={styles.iconButton}>
+          <Settings color="#94a3b8" size={24} />
         </TouchableOpacity>
       </View>
 

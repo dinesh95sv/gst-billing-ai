@@ -1,0 +1,102 @@
+.container {
+    flex: 1;
+    background-color: #0c0f14;
+}
+
+.header {
+    flex-direction: row;
+    align-items: center;
+    padding: 24px;
+    background-color: #0c0f14;
+    border-bottom-width: 1px;
+    border-color: #1f2937;
+}
+
+.backButton {
+    padding: 8px;
+    background-color: #111827;
+    border-radius: 12px;
+}
+
+.headerTitle {
+    flex: 1;
+    margin-left: 16px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+}
+
+.scrollContent {
+    flex-grow: 1;
+    padding: 24px;
+}
+
+.infoCard {
+    background-color: #1e293b;
+    padding: 20px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    border-width: 1px;
+    border-color: #334155;
+}
+
+.infoTitle {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.infoDescription {
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.actionsContainer {
+    gap: 16px;
+}
+
+.actionButton {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+    border-radius: 18px;
+    gap: 12px;
+}
+
+.exportButton {
+    background-color: #3b82f6;
+}
+
+.importButton {
+    background-color: #111827;
+    border-width: 1.5px;
+    border-color: #3b82f6;
+}
+
+.actionButtonText {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.actionButtonSubtext {
+    font-size: 12px;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.footer {
+    padding: 24px;
+    align-items: center;
+}
+
+.footerText {
+    color: #64748b;
+    font-size: 12px;
+    text-align: center;
+    line-height: 18px;
+}

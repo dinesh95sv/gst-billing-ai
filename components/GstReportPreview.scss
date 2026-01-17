@@ -40,52 +40,35 @@
     letter-spacing: -0.5px;
 }
 
-.content {
+.webViewContainer {
     flex: 1;
-    justify-content: center;
-    align-items: center;
-    padding: 24px;
+    background-color: #f3f4f6;
+    margin: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 180px;
 }
 
-.card {
-    background-color: #151c27;
-    padding: 32px;
-    border-radius: 24px;
-    border-width: 1px;
-    border-color: #1f2937;
-    align-items: center;
-    width: 100%;
-    max-width: 320px;
-}
-
-.cardTitle {
-    color: #fff;
-    font-size: 20px;
-    font-weight: 700;
-    margin-top: 24px;
-    margin-bottom: 8px;
-    text-align: center;
-}
-
-.cardSubtitle {
-    color: #9ca3af;
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 32px;
-}
-
-.actions {
-    width: 100%;
-    gap: 16px;
+.bottomBar {
+    position: absolute;
+    bottom: 110px;
+    left: 16px;
+    right: 16px;
+    flex-direction: row;
+    gap: 12px;
+    background-color: transparent;
+    z-index: 50;
 }
 
 .actionButton {
+    flex: 1;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 12px;
     height: 56px;
     border-radius: 16px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 .printButton {
@@ -93,13 +76,11 @@
 }
 
 .shareButton {
-    background-color: #1f2937;
-    border-width: 1px;
-    border-color: #374151;
+    background-color: #22c55e;
 }
 
 .buttonText {
     color: #fff;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
 }

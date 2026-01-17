@@ -5,6 +5,7 @@ import { Search, Plus, Calendar, MoreVertical, Trash2, Eye, ChevronLeft, Chevron
 import { useRouter, useFocusEffect } from 'expo-router';
 import { StorageService } from '../services/storage';
 import { Invoice, InvoiceStatus } from '../types';
+import MonthYearPicker from './MonthYearPicker';
 import styles from './Invoices.scss';
 
 const Invoices: React.FC = () => {
@@ -15,6 +16,8 @@ const Invoices: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [invoiceToDelete, setInvoiceToDelete] = useState<Invoice | null>(null);
   const [activeMenuInvoice, setActiveMenuInvoice] = useState<Invoice | null>(null);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   const filters = ['All', 'Paid', 'Pending', 'Overdue'];
 
@@ -89,12 +92,16 @@ const Invoices: React.FC = () => {
         (inv.customerName?.toLowerCase() || '').includes(searchQuery.toLowerCase()) ||
         (inv.invoiceNumber?.toLowerCase() || '').includes(searchQuery.toLowerCase());
 
+      const invDate = new Date(inv.date);
+      const matchesDate = invDate.getMonth() === selectedDate.getMonth() &&
+        invDate.getFullYear() === selectedDate.getFullYear();
+
       const status = (inv.status || '').toUpperCase();
       const matchesStatus = activeFilter === 'All' || status === activeFilter.toUpperCase();
 
-      return matchesSearch && matchesStatus;
+      return matchesSearch && matchesStatus && matchesDate;
     }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  }, [invoices, searchQuery, activeFilter]);
+  }, [invoices, searchQuery, activeFilter, selectedDate]);
 
   if (loading && invoices.length === 0) {
     return (
@@ -110,7 +117,26 @@ const Invoices: React.FC = () => {
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Invoices</Text>
+        <TouchableOpacity
+          style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#151c27', paddingVertical: 8, paddingHorizontal: 12, borderRadius: 12, borderWidth: 1, borderColor: '#1f2937', gap: 8 }}
+          onPress={() => setShowDatePicker(true)}
+        >
+          <Calendar size={18} color="#3b82f6" />
+          <Text style={{ color: '#fff', fontSize: 13, fontWeight: '700' }}>
+            {selectedDate.toLocaleDateString('en-IN', { month: 'short', year: 'numeric' })}
+          </Text>
+        </TouchableOpacity>
       </View>
+
+      <MonthYearPicker
+        visible={showDatePicker}
+        value={selectedDate}
+        onClose={() => setShowDatePicker(false)}
+        onChange={(date) => {
+          setSelectedDate(date);
+          setShowDatePicker(false);
+        }}
+      />
 
       {/* Search */}
       <View style={styles.searchContainer}>
