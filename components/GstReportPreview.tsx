@@ -56,12 +56,20 @@ const GstReportPreview: React.FC = () => {
     let outputGst = 0;
     const breakdownMap = new Map<number, { cgst: number, sgst: number, igst: number, total: number }>();
 
+    // Initialise standard GST % items with 0 amount
+    const standardRates = [40, 28, 18, 12, 5, 0]; // Added 0% for completeness
+    standardRates.forEach(rate => {
+      breakdownMap.set(rate, { cgst: 0, sgst: 0, igst: 0, total: 0 });
+    });
+
     filtered.forEach(inv => {
       outputGst += inv.taxTotal || 0;
-      const isInterstate = false; // logic to determine interstate vs local
+      // In a real app, we'd check if customer is from another state. 
+      // For now, we'll assume local unless specified.
+      const isInterstate = false;
 
       inv.items.forEach(item => {
-        if (!item.gstRate) return;
+        if (item.gstRate === undefined || item.gstRate === null) return; // Handle undefined/null gstRate
 
         const itemTax = (item.quantity * item.rate) * (item.gstRate / 100);
 
@@ -84,7 +92,7 @@ const GstReportPreview: React.FC = () => {
     const breakdown = Array.from(breakdownMap.entries())
       .sort((a, b) => b[0] - a[0]) // Sort by rate descending
       .map(([rate, data]) => ({
-        description: `Local Sales (${rate}%)`, // Assuming local for now as per original code
+        description: `Local Sales (${rate}%)`,
         ...data
       }));
 

@@ -70,13 +70,37 @@ const GstReport: React.FC = () => {
     const totalSales = filteredInvoices.reduce((sum, inv) => sum + (inv.grandTotal || 0), 0);
     const totalTax = filteredInvoices.reduce((sum, inv) => sum + (inv.taxTotal || 0), 0);
 
-    // Simple estimation if detailed breakdown isn't available
+    // Calculate previous month's tax
+    const prevMonthDate = new Date(selectedDate);
+    prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
+
+    const prevMonthInvoices = invoices.filter(inv => {
+      const d = new Date(inv.date);
+      return d.getMonth() === prevMonthDate.getMonth() && d.getFullYear() === prevMonthDate.getFullYear();
+    });
+
+    const prevMonthTax = prevMonthInvoices.reduce((sum, inv) => sum + (inv.taxTotal || 0), 0);
+
+    let growthText = "No data for last month";
+    let growthColor = "#94a3b8"; // neutral
+
+    if (prevMonthTax > 0) {
+      const diff = ((totalTax - prevMonthTax) / prevMonthTax) * 100;
+      const sign = diff >= 0 ? "+" : "";
+      growthText = `${sign}${diff.toFixed(1)}% vs last month`;
+      growthColor = diff >= 0 ? "#10b981" : "#ef4444"; // emerald (green) or rose (red)
+    } else if (totalTax > 0) {
+      growthText = "+100% vs last month";
+      growthColor = "#10b981";
+    }
+
+    // Existing breakdown logic
     const totalCGST = totalTax / 2;
     const totalSGST = totalTax / 2;
-    const totalIGST = 0; // Ideally calculate from interstate flag
+    const totalIGST = 0;
 
-    return { totalSales, totalTax, cgst: totalCGST, sgst: totalSGST, igst: totalIGST };
-  }, [filteredInvoices]);
+    return { totalSales, totalTax, cgst: totalCGST, sgst: totalSGST, igst: totalIGST, growthText, growthColor };
+  }, [filteredInvoices, invoices, selectedDate]);
 
 
   const handleDateChange = (date: Date) => {
@@ -124,7 +148,7 @@ const GstReport: React.FC = () => {
           <View style={styles.summaryCard}>
             <Text style={styles.summaryLabel}>Total Tax</Text>
             <Text style={styles.summaryValue}>₹{stats.totalTax.toLocaleString('en-IN', { maximumFractionDigits: 2 })}</Text>
-            <Text style={styles.summarySubtext}>+12.5% vs last month</Text>
+            <Text style={[styles.summarySubtext, { color: stats.growthColor }]}>{stats.growthText}</Text>
           </View>
         </View>
 
