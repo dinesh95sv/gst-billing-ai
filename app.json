@@ -18,7 +18,8 @@
       "infoPlist": {
         "NSCameraUsageDescription": "The app accesses your camera to let you capture business logos.",
         "NSPhotoLibraryUsageDescription": "The app accesses your photos to let you upload business logos and signatures."
-      }
+      },
+      "bundleIdentifier": "com.dinesh95sv.gstbillingai"
     },
     "android": {
       "adaptiveIcon": {
