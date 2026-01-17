@@ -8,6 +8,7 @@ import { Invoice, Factory, Customer } from '../types';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { WebView } from 'react-native-webview';
+import * as FileSystem from 'expo-file-system/legacy';
 import styles from './InvoicePreview.scss';
 
 const numberToWords = (num: number): string => {
@@ -108,6 +109,7 @@ const InvoicePreview: React.FC = () => {
       <html>
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+          <title>${invoice.invoiceNumber}</title>
           <style>
             @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
             
@@ -276,21 +278,21 @@ const InvoicePreview: React.FC = () => {
                 <div class="flex justify-between items-center mb-2 text-gray-500 font-medium" style="font-size: 10px;">
                   <span>Subtotal:</span><span class="text-black">${invoice.subTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
                 </div>
+                <div class="flex justify-between items-center mb-2 text-gray-500 font-medium" style="font-size: 10px;">
+                  <span>CGST:</span><span class="text-black">${(invoice.taxTotal / 2).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                </div>
+                <div class="flex justify-between items-center mb-2 text-gray-500 font-medium" style="font-size: 10px;">
+                  <span>SGST:</span><span class="text-black">${(invoice.taxTotal / 2).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                </div>
                 ${discountAmount > 0 ? `
                   <div class="flex justify-between items-center mb-2 text-gray-500 font-medium" style="font-size: 10px;">
                     <span>Discount:</span><span class="text-rose-500 font-bold">-${discountAmount.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
                   </div>
                 ` : ''}
-                <div class="flex justify-between items-center mb-2 text-gray-500 font-medium" style="font-size: 10px; border-top: 1px solid #f9fafb; padding-top: 4px;">
-                  <span>Taxable Value:</span><span class="text-black font-bold">${taxableValue.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
-                </div>
-                <div class="flex justify-between items-center mb-2 text-gray-500 font-medium" style="font-size: 10px;">
-                  <span>Total GST:</span><span class="text-black font-bold">${invoice.taxTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
-                </div>
                 
                 <div class="flex justify-between items-end mt-2 pt-4" style="border-top: 1px solid #e5e7eb;">
-                   <span class="font-black uppercase text-gray-900" style="font-size: 12px;">GRAND TOTAL:</span>
-                   <span class="font-black text-blue-600" style="font-size: 20px;">₹${finalTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                   <span class="font-black uppercase text-gray-900" style="font-size: 11px;">GRAND TOTAL:</span>
+                   <span class="font-black text-blue-600" style="font-size: 18px;">₹${finalTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
                 </div>
               </div>
             </div>
@@ -332,11 +334,21 @@ const InvoicePreview: React.FC = () => {
   };
 
   const handleShare = async () => {
+    if (!invoice) return;
     try {
       setIsProcessing(true);
       const html = generateHtml();
       const { uri } = await Print.printToFileAsync({ html });
-      await Sharing.shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
+
+      // Rename temp file to invoice number
+      const fileName = `${invoice.invoiceNumber.replace(/[/\\?%*:|"<>]/g, '-')}.pdf`;
+      const newUri = `${FileSystem.cacheDirectory}${fileName}`;
+      await FileSystem.moveAsync({
+        from: uri,
+        to: newUri
+      });
+
+      await Sharing.shareAsync(newUri, { UTI: '.pdf', mimeType: 'application/pdf' });
     } catch (e) {
       Alert.alert('Error', 'Failed to share invoice');
       console.error(e);
