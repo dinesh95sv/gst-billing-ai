@@ -68,7 +68,7 @@ const Dashboard: React.FC = () => {
       <View style={styles.header}>
         <View>
           <Text style={styles.headerTitle}>Dashboard</Text>
-          <Text style={styles.headerSubtitle}>GST Billing Pro</Text>
+          <Text style={styles.headerSubtitle}>Smart Yedu</Text>
         </View>
         <TouchableOpacity onPress={() => router.push('/backup-restore')} style={styles.iconButton}>
           <Settings color="#94a3b8" size={24} />

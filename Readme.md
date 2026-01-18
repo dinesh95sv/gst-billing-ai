@@ -1,4 +1,4 @@
-# GST Billing AI - Mobile App
+# Smart Yedu 📱🧾
 
 A powerful, cross-platform mobile application for GST billing and invoicing, built with React Native, Expo, and NativeWind.
 

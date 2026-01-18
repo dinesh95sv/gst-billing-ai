@@ -305,7 +305,7 @@ const CustomerForm: React.FC = () => {
             <Text style={styles.saveButtonText}>{isEditMode ? 'Update Customer' : 'Save Customer'}</Text>
           </TouchableOpacity>
 
-          <Text style={styles.footerText}>GST Billing AI • Secure Customer Data</Text>
+          <Text style={styles.footerText}>Smart Yedu • Secure Customer Data</Text>
 
         </ScrollView>
       </KeyboardAvoidingView>

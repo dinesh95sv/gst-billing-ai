@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "gst-billing-ai",
-    "slug": "gst-billing-ai",
-    "scheme": "gst-billing-ai",
+    "name": "Smart Yedu",
+    "slug": "smart-yedu",
+    "scheme": "smart-yedu",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
