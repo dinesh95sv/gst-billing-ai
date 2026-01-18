@@ -232,11 +232,6 @@ const FactoryForm: React.FC = () => {
                 onChangeText={text => setFormData(prev => ({ ...prev, gstin: text }))}
                 autoCapitalize="characters"
               />
-              {formData.gstin && formData.gstin.length >= 15 && (
-                <View style={styles.verifiedBadge}>
-                  <Text style={styles.verifiedText}>Verified</Text>
-                </View>
-              )}
             </View>
           </View>
 
