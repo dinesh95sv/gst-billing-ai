@@ -30,6 +30,17 @@ const CustomerForm: React.FC = () => {
     }, [id])
   );
 
+  const initialFormState: Partial<Customer> = {
+    name: '',
+    gstin: '',
+    address: '',
+    phone: '',
+    email: '',
+    contactPerson: '',
+    isActive: true,
+    shippingAddresses: []
+  };
+
   const loadData = async () => {
     if (isEditMode && id) {
       setLoading(true);
@@ -47,6 +58,8 @@ const CustomerForm: React.FC = () => {
       } finally {
         setLoading(false);
       }
+    } else {
+      setFormData(initialFormState);
     }
   };
 

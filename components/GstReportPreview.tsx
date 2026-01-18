@@ -69,9 +69,8 @@ const GstReportPreview: React.FC = () => {
       const isInterstate = false;
 
       inv.items.forEach(item => {
-        if (item.gstRate === undefined || item.gstRate === null) return; // Handle undefined/null gstRate
-
-        const itemTax = (item.quantity * item.rate) * (item.gstRate / 100);
+        const totalAmount = item.quantity * item.rate;
+        const itemTax = totalAmount - (totalAmount / (1 + (item.gstRate || 0) / 100));
 
         if (!breakdownMap.has(item.gstRate)) {
           breakdownMap.set(item.gstRate, { cgst: 0, sgst: 0, igst: 0, total: 0 });

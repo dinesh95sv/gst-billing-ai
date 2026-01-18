@@ -233,22 +233,32 @@ const InvoicePreview: React.FC = () => {
                   <th class="text-center">Qty</th>
                   <th class="text-right">Rate</th>
                   <th class="text-right">GST%</th>
-                  <th class="text-right">Amt</th>
+                  <th class="text-right">Tax Amt</th>
+                  <th class="text-right">Total</th>
                 </tr>
               </thead>
               <tbody>
-                ${invoice.items.map(item => `
-                  <tr>
-                    <td class="font-black text-gray-800">${item.productName}</td>
-                    <td class="text-center font-bold text-gray-600">${item.quantity}</td>
-                    <td class="text-right font-bold text-gray-600">${item.rate.toFixed(2)}</td>
-                    <td class="text-right font-bold text-gray-600">${item.gstRate}%</td>
-                    <td class="text-right font-black text-gray-900">${(item.quantity * item.rate).toLocaleString('en-IN', { minimumFractionDigits: 2 })}</td>
-                  </tr>
-                `).join('')}
+                ${invoice.items.map(item => {
+      const isInclusive = item.isInclusive ?? false;
+      const baseRate = item.rate / (1 + item.gstRate / 100);
+      const baseAmount = item.quantity * baseRate;
+      const totalAmount = item.quantity * item.rate;
+      const taxAmount = totalAmount - baseAmount;
+
+      return `
+                    <tr>
+                      <td class="font-black text-gray-800">${item.productName}</td>
+                      <td class="text-center font-bold text-gray-600">${item.quantity}</td>
+                      <td class="text-right font-bold text-gray-600">${baseRate.toFixed(2)}</td>
+                      <td class="text-right font-bold text-gray-600">${item.gstRate}%</td>
+                      <td class="text-right font-bold text-gray-600">${taxAmount.toFixed(2)}</td>
+                      <td class="text-right font-black text-gray-900">${totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</td>
+                    </tr>
+                  `;
+    }).join('')}
                 <!-- Spacer rows like backup -->
                 ${Array(Math.max(0, 5 - invoice.items.length)).fill('').map(() =>
-      `<tr style="height: 40px; border-bottom: 1px solid rgba(243, 244, 246, 0.5);"><td></td><td></td><td></td><td></td><td></td></tr>`
+      `<tr style="height: 40px; border-bottom: 1px solid rgba(243, 244, 246, 0.5);"><td></td><td></td><td></td><td></td><td></td><td></td></tr>`
     ).join('')}
               </tbody>
             </table>

@@ -16,10 +16,10 @@ const Products: React.FC = () => {
     const existing = StorageService.getProducts();
     if (existing.length === 0) {
       const mockProducts: Product[] = [
-        { id: 'p1', name: 'Premium Cotton Fabric', hsnCode: '5208', price: 450.00, gstRate: 12, imageUrl: 'https://picsum.photos/seed/fabric1/200/200' },
-        { id: 'p2', name: 'Industrial Sewing Thread', hsnCode: '5401', price: 85.00, gstRate: 5, imageUrl: 'https://picsum.photos/seed/thread/200/200' },
-        { id: 'p3', name: 'Heavy Duty Tailoring Scissors', hsnCode: '8448', price: 1200.00, gstRate: 18, imageUrl: 'https://picsum.photos/seed/scissors/200/200' },
-        { id: 'p6', name: 'Raw Wool (Exempt)', hsnCode: '5101', price: 320.00, gstRate: 0, imageUrl: 'https://picsum.photos/seed/wool/200/200' },
+        { id: 'p1', name: 'Premium Cotton Fabric', hsnCode: '5208', price: 450.00, gstRate: 12 },
+        { id: 'p2', name: 'Industrial Sewing Thread', hsnCode: '5401', price: 85.00, gstRate: 5 },
+        { id: 'p3', name: 'Heavy Duty Tailoring Scissors', hsnCode: '8448', price: 1200.00, gstRate: 18 },
+        { id: 'p6', name: 'Raw Wool (Exempt)', hsnCode: '5101', price: 320.00, gstRate: 0 },
       ];
       mockProducts.forEach(p => StorageService.saveProduct(p));
       setProducts(mockProducts);
@@ -31,9 +31,9 @@ const Products: React.FC = () => {
   const filterOptions = ['All', '0% GST', '5% GST', '12% GST', '18% GST', '28% GST'];
 
   const filteredProducts = products.filter(product => {
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          product.hsnCode.includes(searchQuery);
-    
+    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.hsnCode.includes(searchQuery);
+
     if (activeFilter === 'All') return matchesSearch;
     const filterRate = parseInt(activeFilter);
     return matchesSearch && product.gstRate === filterRate;
@@ -64,7 +64,7 @@ const Products: React.FC = () => {
       <div className="px-6 space-y-5">
         <div className="relative group">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-blue-500 transition-colors" size={20} />
-          <input 
+          <input
             placeholder="Search products or HSN..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -78,11 +78,10 @@ const Products: React.FC = () => {
             <button
               key={opt}
               onClick={() => setActiveFilter(opt)}
-              className={`px-6 py-2 rounded-full whitespace-nowrap text-sm font-bold transition-all border ${
-                activeFilter === opt 
-                ? 'bg-[#3b82f6] text-white border-transparent shadow-lg shadow-blue-500/20' 
-                : 'bg-[#151c27]/50 text-gray-500 border-gray-800 hover:border-gray-700'
-              }`}
+              className={`px-6 py-2 rounded-full whitespace-nowrap text-sm font-bold transition-all border ${activeFilter === opt
+                  ? 'bg-[#3b82f6] text-white border-transparent shadow-lg shadow-blue-500/20'
+                  : 'bg-[#151c27]/50 text-gray-500 border-gray-800 hover:border-gray-700'
+                }`}
             >
               {opt}
             </button>
@@ -93,16 +92,15 @@ const Products: React.FC = () => {
       {/* Product List */}
       <div className="px-6 space-y-4 mt-6 pb-40">
         {filteredProducts.map((product) => (
-          <div 
-            key={product.id} 
+          <div
+            key={product.id}
             onClick={() => navigate(`/edit-product/${product.id}`)}
             className="bg-[#151c27] p-5 rounded-[2.5rem] flex items-center justify-between border border-gray-800/20 hover:border-gray-700/50 transition-all active:scale-[0.98] cursor-pointer group"
           >
             <div className="flex-1 pr-4">
               <div className="flex items-center space-x-3 mb-2">
-                <span className={`px-3 py-1 rounded-lg text-[10px] font-bold tracking-wider uppercase border ${
-                  product.gstRate === 0 ? 'bg-gray-500/10 text-gray-400 border-gray-500/20' : 'bg-[#eab308]/10 text-[#eab308] border-[#eab308]/20'
-                }`}>
+                <span className={`px-3 py-1 rounded-lg text-[10px] font-bold tracking-wider uppercase border ${product.gstRate === 0 ? 'bg-gray-500/10 text-gray-400 border-gray-500/20' : 'bg-[#eab308]/10 text-[#eab308] border-[#eab308]/20'
+                  }`}>
                   {product.gstRate}% GST
                 </span>
                 <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">
@@ -115,7 +113,7 @@ const Products: React.FC = () => {
                   <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">MRP</span>
                   <span className="text-2xl font-black text-[#3b82f6]">₹ {product.price.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
                 </div>
-                <button 
+                <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setProductToDelete(product);
@@ -166,13 +164,13 @@ const Products: React.FC = () => {
             </div>
 
             <div className="flex space-x-4">
-              <button 
+              <button
                 onClick={() => setProductToDelete(null)}
                 className="flex-1 py-4 rounded-2xl bg-gray-800 text-gray-400 font-bold"
               >
                 Cancel
               </button>
-              <button 
+              <button
                 onClick={handleDelete}
                 className="flex-1 py-4 rounded-2xl bg-rose-600 text-white font-bold"
               >
@@ -184,9 +182,9 @@ const Products: React.FC = () => {
       )}
 
       {/* FAB */}
-      <button 
+      <button
         className="fixed bottom-28 right-8 w-16 h-16 bg-[#3b82f6] rounded-full flex items-center justify-center text-white shadow-2xl shadow-blue-500/60 active:scale-90 transition-transform z-30"
-        onClick={() => navigate('/add-product')} 
+        onClick={() => navigate('/add-product')}
       >
         <Plus size={32} strokeWidth={3} />
       </button>

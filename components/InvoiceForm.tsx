@@ -308,7 +308,7 @@ const InvoiceForm: React.FC = () => {
   const [invoiceDate, setInvoiceDate] = useState(new Date().toISOString().split('T')[0]);
   const [discount, setDiscount] = useState<string>('0');
   const [items, setItems] = useState<Partial<InvoiceItem>[]>([
-    { id: Math.random().toString(), productName: '', quantity: 1, rate: 0, gstRate: 0 }
+    { id: Math.random().toString(), productName: '', quantity: 1, rate: 0, gstRate: 0, isInclusive: false }
   ]);
   const [loading, setLoading] = useState(true);
 
@@ -355,7 +355,7 @@ const InvoiceForm: React.FC = () => {
         setSelectedCustomerId('');
         setSelectedFactoryId('');
         setSelectedShippingAddress(null);
-        setItems([{ id: Math.random().toString(), productName: '', quantity: 1, rate: 0, gstRate: 0 }]);
+        setItems([{ id: Math.random().toString(), productName: '', quantity: 1, rate: 0, gstRate: 0, isInclusive: false }]);
         setDiscount('0');
 
         const today = new Date();
@@ -379,7 +379,7 @@ const InvoiceForm: React.FC = () => {
   const selectedCustomer = customers.find(c => c.id === selectedCustomerId);
 
   const handleAddItem = () => {
-    setItems([...items, { id: Math.random().toString(), productName: '', quantity: 1, rate: 0, gstRate: 0 }]);
+    setItems([...items, { id: Math.random().toString(), productName: '', quantity: 1, rate: 0, gstRate: 0, isInclusive: false }]);
   };
 
   const removeItem = (itemId: string) => {
@@ -409,7 +409,8 @@ const InvoiceForm: React.FC = () => {
           productId: product.id,
           productName: product.name,
           rate: product.price,
-          gstRate: product.gstRate
+          gstRate: product.gstRate,
+          isInclusive: product.isInclusive
         } : item
       ));
     }
@@ -419,12 +420,22 @@ const InvoiceForm: React.FC = () => {
     let subTotal = 0;
     let taxTotal = 0;
     items.forEach(item => {
-      const lineSub = (item.quantity || 0) * (item.rate || 0);
-      subTotal += lineSub;
-      taxTotal += lineSub * ((item.gstRate || 0) / 100);
+      const qty = item.quantity || 0;
+      const rate = item.rate || 0;
+      const gst = item.gstRate || 0;
+      const lineTotal = qty * rate;
+      const lineTax = lineTotal - (lineTotal / (1 + gst / 100));
+      taxTotal += lineTax;
+
+      if (item.isInclusive) {
+        subTotal += lineTotal;
+      } else {
+        subTotal += lineTotal - lineTax;
+      }
     });
     const parsedDiscount = parseFloat(discount) || 0;
-    const grandTotal = subTotal + taxTotal - parsedDiscount;
+    const totalLines = items.reduce((sum, item) => sum + ((item.quantity || 0) * (item.rate || 0)), 0);
+    const grandTotal = totalLines - parsedDiscount;
     return { subTotal, taxTotal, grandTotal };
   };
 

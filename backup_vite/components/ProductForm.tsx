@@ -45,8 +45,7 @@ const ProductForm: React.FC = () => {
       hsnCode: formData.hsnCode || '',
       price: formData.price || 0,
       gstRate: formData.gstRate || 0,
-      isInclusive: formData.isInclusive || false,
-      imageUrl: formData.imageUrl || `https://picsum.photos/seed/${formData.id || Date.now()}/200/200`
+      isInclusive: formData.isInclusive || false
     };
 
     StorageService.saveProduct(productData);
@@ -76,25 +75,25 @@ const ProductForm: React.FC = () => {
       <div className="px-6 pb-60 flex-1 overflow-y-auto no-scrollbar">
         {/* Basic Information Section */}
         <p className={sectionLabelStyle}>Basic Information</p>
-        
+
         <div className="space-y-6">
           <div>
             <label className={labelStyle}>Product Name</label>
-            <input 
+            <input
               className={inputStyle}
               placeholder="e.g. Industrial Steel Pipe"
               value={formData.name}
-              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             />
           </div>
 
           <div>
             <label className={labelStyle}>HSN Code</label>
-            <input 
+            <input
               className={inputStyle}
               placeholder="Enter 4 or 8 digit HSN"
               value={formData.hsnCode}
-              onChange={(e) => setFormData({...formData, hsnCode: e.target.value})}
+              onChange={(e) => setFormData({ ...formData, hsnCode: e.target.value })}
             />
           </div>
         </div>
@@ -107,12 +106,12 @@ const ProductForm: React.FC = () => {
             <label className={labelStyle}>Unit Price</label>
             <div className="relative">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-bold">₹</span>
-              <input 
+              <input
                 type="number"
                 className={`${inputStyle} pl-8`}
                 placeholder="0.00"
                 value={formData.price || ''}
-                onChange={(e) => setFormData({...formData, price: parseFloat(e.target.value) || 0})}
+                onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) || 0 })}
               />
             </div>
           </div>
@@ -120,10 +119,10 @@ const ProductForm: React.FC = () => {
           <div>
             <label className={labelStyle}>GST %</label>
             <div className="relative">
-              <select 
+              <select
                 className={`${inputStyle} appearance-none pr-10`}
                 value={formData.gstRate}
-                onChange={(e) => setFormData({...formData, gstRate: parseInt(e.target.value)})}
+                onChange={(e) => setFormData({ ...formData, gstRate: parseInt(e.target.value) })}
               >
                 <option value="0">0%</option>
                 <option value="5">5%</option>
@@ -142,8 +141,8 @@ const ProductForm: React.FC = () => {
             <h4 className="text-white font-bold mb-1">Inclusive of GST</h4>
             <p className="text-[10px] text-gray-500 font-medium">Tax is already included in the unit price</p>
           </div>
-          <button 
-            onClick={() => setFormData({...formData, isInclusive: !formData.isInclusive})}
+          <button
+            onClick={() => setFormData({ ...formData, isInclusive: !formData.isInclusive })}
             className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors focus:outline-none ${formData.isInclusive ? 'bg-blue-600' : 'bg-[#2a3441]'}`}
           >
             <span
@@ -155,14 +154,14 @@ const ProductForm: React.FC = () => {
 
       {/* Action Bar */}
       <div className="fixed bottom-24 left-0 right-0 p-6 bg-[#0c0f14]/80 backdrop-blur-md max-w-md mx-auto z-30 flex space-x-4">
-        <button 
+        <button
           onClick={handleReset}
           className="w-16 h-16 bg-[#151c27] border border-gray-800 rounded-2xl flex items-center justify-center text-gray-400 hover:text-white transition-colors"
           title="Reset"
         >
           <RotateCcw size={22} />
         </button>
-        <button 
+        <button
           onClick={handleSave}
           className="flex-1 bg-[#3b82f6] hover:bg-blue-600 transition-all rounded-2xl flex items-center justify-center space-x-3 shadow-2xl shadow-blue-500/30 active:scale-[0.98] text-white"
         >

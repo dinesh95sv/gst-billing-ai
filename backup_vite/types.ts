@@ -39,7 +39,6 @@ export interface Product {
   hsnCode: string;
   price: number;
   gstRate: number; // e.g., 18 for 18%
-  imageUrl?: string;
   isInclusive?: boolean;
   category?: string;
 }

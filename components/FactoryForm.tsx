@@ -35,6 +35,20 @@ const FactoryForm: React.FC = () => {
     }, [id, isEditMode])
   );
 
+  const initialFormState: Partial<Factory> = {
+    name: '',
+    gstin: '',
+    location: '',
+    phone: '',
+    pincode: '',
+    bankName: '',
+    accountNumber: '',
+    ifscCode: '',
+    isActive: true,
+    logo: '',
+    signature: ''
+  };
+
   const loadData = async () => {
     try {
       if (isEditMode && id) {
@@ -44,6 +58,8 @@ const FactoryForm: React.FC = () => {
           setFormData(existing);
         }
         setLoading(false);
+      } else {
+        setFormData(initialFormState);
       }
     } catch (e) {
       console.error("Error loading factory data", e);

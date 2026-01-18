@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, ScrollView, Switch, KeyboardAvoidingView, Platform, Alert, Dimensions } from 'react-native';
-import { useRouter, useLocalSearchParams } from 'expo-router';
+import { useRouter, useLocalSearchParams, useFocusEffect } from 'expo-router';
 import { ChevronLeft, HelpCircle, Save, RotateCcw, ChevronRight } from 'lucide-react-native';
 import { StorageService } from '../services/storage';
 import { Product } from '../types';
@@ -24,9 +24,11 @@ const ProductForm: React.FC = () => {
   const [formData, setFormData] = useState<Partial<Product>>(initialFormState);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    loadProduct();
-  }, [id, isEditMode]);
+  useFocusEffect(
+    React.useCallback(() => {
+      loadProduct();
+    }, [id, isEditMode])
+  );
 
   const loadProduct = async () => {
     if (isEditMode && id) {
@@ -41,6 +43,8 @@ const ProductForm: React.FC = () => {
       } finally {
         setLoading(false);
       }
+    } else {
+      setFormData(initialFormState);
     }
   };
 
@@ -61,7 +65,6 @@ const ProductForm: React.FC = () => {
       price: formData.price || 0,
       gstRate: formData.gstRate || 0,
       isInclusive: formData.isInclusive || false,
-      imageUrl: formData.imageUrl || `https://picsum.photos/seed/${formData.id || Date.now()}/200/200`
     };
 
     await StorageService.saveProduct(productData);
