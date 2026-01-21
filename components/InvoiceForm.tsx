@@ -366,7 +366,7 @@ const InvoiceForm: React.FC = () => {
 
         const allInvoices = await StorageService.getInvoices();
         const todayCount = allInvoices.filter(inv => inv.date === dateStr).length;
-        setInvoiceNumber(`#INV-${yyyy}-${mm}-${dd}-${String(todayCount + 1).padStart(3, '0')}`);
+        setInvoiceNumber(`INV-${yyyy}-${mm}-${dd}-${String(todayCount + 1).padStart(3, '0')}`);
         setInvoiceDate(dateStr);
       }
     } catch (error) {

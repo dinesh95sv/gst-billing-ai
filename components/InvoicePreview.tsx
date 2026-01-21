@@ -8,7 +8,7 @@ import { Invoice, Factory, Customer } from '../types';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 import { WebView } from 'react-native-webview';
-import * as FileSystem from 'expo-file-system/legacy';
+import { File, Paths } from 'expo-file-system';
 import styles from './InvoicePreview.scss';
 
 const numberToWords = (num: number): string => {
@@ -396,15 +396,14 @@ const InvoicePreview: React.FC = () => {
       const html = generateHtml();
       const { uri } = await Print.printToFileAsync({ html });
 
-      // Rename temp file to invoice number
+      // Rename temp file to invoice number using new File API
       const fileName = `${invoice.invoiceNumber.replace(/[/\\?%*:|"<>]/g, '-')}.pdf`;
-      const newUri = `${FileSystem.cacheDirectory}${fileName}`;
-      await FileSystem.copyAsync({
-        from: uri,
-        to: newUri
-      });
+      const destinationFile = new File(Paths.cache, fileName);
+      const sourceFile = new File(uri);
 
-      await Sharing.shareAsync(newUri, { UTI: '.pdf', mimeType: 'application/pdf' });
+      sourceFile.copy(destinationFile);
+
+      await Sharing.shareAsync(destinationFile.uri, { UTI: '.pdf', mimeType: 'application/pdf' });
     } catch (e) {
       Alert.alert('Error', 'Failed to share invoice');
       console.error(e);

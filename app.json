@@ -19,7 +19,7 @@
         "NSCameraUsageDescription": "The app accesses your camera to let you capture business logos.",
         "NSPhotoLibraryUsageDescription": "The app accesses your photos to let you upload business logos and signatures."
       },
-      "bundleIdentifier": "com.dinesh95sv.gstbillingai"
+      "bundleIdentifier": "com.dinesh95sv.smartyedu"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,7 +31,7 @@
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ],
-      "package": "com.dinesh95sv.gstbillingai"
+      "package": "com.dinesh95sv.smartyedu"
     },
     "web": {
       "output": "static",
@@ -55,7 +55,7 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "15ad1657-9458-4913-a4e0-548aeca9cf76"
+        "projectId": "8fbfb894-4056-46df-94c3-c9a4d4ef9630"
       }
     },
     "owner": "dinesh95sv"

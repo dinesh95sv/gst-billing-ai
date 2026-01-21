@@ -7,6 +7,7 @@ import { StorageService } from '../services/storage';
 import { Invoice, Factory } from '../types';
 import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
+import { File, Paths } from 'expo-file-system';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { WebView } from 'react-native-webview';
 import styles from './GstReportPreview.scss';
@@ -236,7 +237,16 @@ const GstReportPreview: React.FC = () => {
       setIsProcessing(true);
       const html = generateHtml();
       const { uri } = await Print.printToFileAsync({ html });
-      await Sharing.shareAsync(uri, { UTI: '.pdf', mimeType: 'application/pdf' });
+
+
+      // Use new File API to rename and share the report
+      const fileName = `Report_${reportData.period.replace(/[/\\?%*:|"<>]/g, '-')}.pdf`;
+      const destinationFile = new File(Paths.cache, fileName);
+      const sourceFile = new File(uri);
+
+      sourceFile.move(destinationFile);
+
+      await Sharing.shareAsync(destinationFile.uri, { UTI: '.pdf', mimeType: 'application/pdf' });
     } catch (e) {
       Alert.alert('Error', 'Failed to share report');
       console.error(e);
